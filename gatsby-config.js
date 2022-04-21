@@ -1,14 +1,14 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Blog`,
+    title: `Hamid Eslami Blog`,
     author: {
-      name: `Kyle Mathews`,
-      summary: `who lives and works in San Francisco building useful things.`,
+      name: `Hamid Eslami`,
+      summary: `who lives and works in Iran building useful things.`,
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    siteUrl: `https://hamid-eslami.ir/`,
     social: {
-      twitter: `kylemathews`,
+      linkedin: `hamid-eslami`,
     },
   },
   plugins: [
