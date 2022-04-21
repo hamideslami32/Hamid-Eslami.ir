@@ -1,0 +1,21 @@
+on:
+  push:
+    branches:    
+      - 'master'
+  workflow_dispatch
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.18.2
+      - name: Installing Dependencies
+        run: npm install
+      - name: Building Gatsby
+        run: npm run build
+      - name: Copying files to server
+        run: echo {{PUBLISH_SSH_KEY}} > key.pub
+        run: scp -r -i key.pub ./public/* {{USER}}@{{HOST}}:/var/www/html
