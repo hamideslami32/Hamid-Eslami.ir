@@ -2,7 +2,7 @@ on:
   push:
     branches:    
       - 'master'
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -12,10 +12,15 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 14.18.2
-      - name: Installing Dependencies
-        run: npm install
+      - name: NPM install cache
+        uses: bahmutov/npm-install@v1.6.0
       - name: Building Gatsby
         run: npm run build
-      - name: Copying files to server
-        run: echo {{PUBLISH_SSH_KEY}} > key.pub
-        run: scp -r -i key.pub ./public/* {{USER}}@{{HOST}}:/var/www/html
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{secrets.HOST}}
+          username: ${{secrets.USER}}
+          password: ${{secrets.PASSWORD}}
+          source: "public"
+          target: "gatsby/app/"
